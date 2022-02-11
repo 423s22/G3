@@ -35,8 +35,8 @@ For now the in-devlopment application can be found at our [development heroku ap
 
 #### Necessary Tools/Software
 
-- Visual Studio IDE (available at [link](link))
-- .NET SDK 5 (available at [link](link))
+- Visual Studio IDE (available at [here](https://visualstudio.microsoft.com/downloads/))
+- .NET SDK 5 (available at [here](https://dotnet.microsoft.com/en-us/download/dotnet/5.0))
 - Git (<https://git-scm.com/>)
 - Terminal on Mac/Linux, PowerShell on Windows
 
