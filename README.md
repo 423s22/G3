@@ -6,7 +6,7 @@ Authors: Silas Almgren, Marnie Manning, Patrick O'Connor
 
 ## Using the application
 
-For now the in-devlopment application can be found at [heroku link here](link)
+For now the in-devlopment application can be found at our [development heroku app](https://etdvalidator-dev.herokuapp.com/)
 
 ## Development  Instructions
 
