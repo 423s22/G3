@@ -105,3 +105,7 @@ After pushing changes you're ready to open a pull request.
 - Follow the format of [this template](https://github.com/423s22/G3/blob/main/.github/pull_request_template.md) to begin describing the changes in your pull request
 - Open your request and wait for it to be merged!
   - Note: in order to be merged, your changes must build successfully in the CI/CD pipeline. This pipeline can be viewed under ["Actions" in github](https://github.com/423s22/G3/actions).
+
+### Issues
+
+Issues should simply be tracked through the [repository issue page](https://github.com/423s22/G3/issues)
