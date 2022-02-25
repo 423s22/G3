@@ -3,7 +3,8 @@
 A piece of software for validating electronic dissertations and theses to ensure that they are in the proper format. More information on [these documents here](https://www.montana.edu/etd/etd_format.html)
 
 Authors: Silas Almgren, Marnie Manning, Patrick O'Connor
-Scrum Artifacts: https://docs.google.com/spreadsheets/d/1vMsgJqcq-de_TvijcnDFhtC3tjhCkrVmlte_-1rYX8c/edit#gid=1410066615
+
+[Scrum Artifacts Here](https://docs.google.com/spreadsheets/d/1vMsgJqcq-de_TvijcnDFhtC3tjhCkrVmlte_-1rYX8c/edit#gid=1410066615)
 
 ## Using the application
 

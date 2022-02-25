@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Open-XML-SDK" Version="2.9.1" />
+  </ItemGroup>
+
 </Project>
