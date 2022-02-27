@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Uploader";
+}
+@model LoadDocumentViewModel
+<link rel="stylesheet" href="~/css/upload-page.css">
+
+
+<div class="text-center">
+    <h1 class="display-4">ETD Uploader</h1>
+    
+    <div id="file-loader-container" class="container-fluid">
+        @if (null != @ViewBag.xmlVal)
+        {
+            <p id="return-message">@ViewBag.xmlVal</p>
+        }
+        <form method="POST" asp-controller="Home" asp-action="LoadDocument" enctype="multipart/form-data">
+            <div class="drop-zone">
+                <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                <input type="file" name="Document" accept=".docx" asp-for="Document" class="drop-zone__input">
+            </div>
+            <input type="submit" id="drop-zone__submit" value="Upload File" class="submit"/>
+        </form>
+    </div>
+    
+</div>
+
+
+<script src="~/js/upload-page.js"></script>
