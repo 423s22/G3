@@ -36,7 +36,8 @@ namespace ETDVAlidator.Models.Validators
                                 new JArray(
                                     from warning in Warnings
                                     select new JObject(
-                                        new JProperty(warning.WarningName, warning.WarningDescription)
+                                        new JProperty("warning_name", warning.WarningName),
+                                        new JProperty("warning_description", warning.WarningDescription)
                                     )
                                 )
                             ),
@@ -44,7 +45,8 @@ namespace ETDVAlidator.Models.Validators
                                 new JArray(
                                     from error in Errors
                                     select new JObject(
-                                        new JProperty(error.ErrorName, error.ErrorDescription)
+                                        new JProperty("error_name", error.ErrorName),
+                                        new JProperty("error_description", error.ErrorDescription)
                                     )
                                 )
                             )
