@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Uploader";
+}
+@model LoadDocumentViewModel
+<link rel="stylesheet" href="~/css/upload-page.css">
+
+
+<div class="text-center">
+    <h1 class="display-4">ETD Uploader</h1>
+
+    @if (null != @ViewBag.xmlVal)
+    {
+        <p id="return-message">@ViewBag.xmlVal</p>
+    }
+    
+</div>
+
+
+<script src="~/js/upload-page.js"></script>
