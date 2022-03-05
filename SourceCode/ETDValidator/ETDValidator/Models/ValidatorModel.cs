@@ -18,10 +18,13 @@ namespace ETDVAlidator.Models
 
         public string Validate()
         {
+            // validate individual components and return their validation as a JObject
             var fontValidation = new Validators.FontValidator().Validate(DocToValidate);
             var spaceValidation = new Validators.SpacingValidator().Validate(DocToValidate);
             var marginValidation = new Validators.MarginValidator().Validate(DocToValidate);
 
+            // this is the object returned to the front end
+            // for now it has the name of the passed document and the three validated components
             var returnValueObj = new
             {
                 document = new

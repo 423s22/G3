@@ -25,6 +25,7 @@ namespace ETDVAlidator.Controllers
         [HttpPost]
         public IActionResult DocumentResults(LoadDocumentViewModel viewModel)
         {
+            // pull file from view model and format into input stream
             var uploadedFile = viewModel.Document;
             var inputStream = uploadedFile.OpenReadStream();
 
@@ -32,14 +33,19 @@ namespace ETDVAlidator.Controllers
             
             try
             {
+                // pass input stream into new word processing object
                 var wordDocument = WordprocessingDocument.Open(inputStream, false);
                 var body = wordDocument.MainDocumentPart.Document.Body;
 
+                // if it wasn't an empty file, we'll do validation
                 if (null != body)
                 {
                     var filename = uploadedFile.FileName;
+                    
+                    // create new validation model with passed file
                     ValidatorModel vm = new ValidatorModel(wordDocument, filename);
                  
+                    // do the validation and format to json string
                     returnJson = vm.Validate();
                 }
             }
@@ -49,7 +55,10 @@ namespace ETDVAlidator.Controllers
                 Console.WriteLine(e.StackTrace);
             }
             
+            //TODO: json string should be passed as object, rather than just a view bag string
             ViewBag.xmlVal = returnJson;
+            
+            // return document results view
             return View();
         }
         
