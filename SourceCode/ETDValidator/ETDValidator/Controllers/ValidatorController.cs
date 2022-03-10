@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using DocumentFormat.OpenXml;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ETDVAlidator.Models;
@@ -37,8 +38,19 @@ namespace ETDVAlidator.Controllers
                 var wordDocument = WordprocessingDocument.Open(inputStream, false);
                 var body = wordDocument.MainDocumentPart.Document.Body;
 
+                
                 // if it wasn't an empty file, we'll do validation
-                if (null != body)
+                if (wordDocument.DocumentType != WordprocessingDocumentType.Document)
+                {
+                    //Return some sort of error message to screen
+                }
+
+                if (body is null)
+                {
+                    // Return some sort of error?
+                }
+
+                if (body is not null)
                 {
                     var filename = uploadedFile.FileName;
                     
