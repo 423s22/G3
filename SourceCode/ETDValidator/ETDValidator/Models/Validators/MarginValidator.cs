@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Office2010.PowerPoint;
 using DocumentFormat.OpenXml.Packaging;
@@ -14,77 +16,76 @@ namespace ETDVAlidator.Models.Validators
             Warnings = new List<ComponentWarning>();
             Errors = new List<ComponentError>();
         }
-
-
+        
         protected override void ParseContents()
         {
             // do parsing here, add errors and warnings
             // DocToValidate is WordprocessignDocument object to parse through 
-            
-                            // Assign a reference to the existing document body.
+            // Assign a reference to the existing document body.
                 Body body = DocToValidate.MainDocumentPart.Document.Body;
-
-                MainDocumentPart mainDoc = DocToValidate.MainDocumentPart.Document.MainDocumentPart;
-                IEnumerator<HeaderPart> enumerator = mainDoc.HeaderParts.GetEnumerator();
-
-                IEnumerable<PageMargin> margins2 = mainDoc.Document.Elements<PageMargin>();
-
-                Settings settings = mainDoc.DocumentSettingsPart.Settings;
+                
                 // Grab the results
                 // The Raw view will hold all of the text in the body
                 // Results will have each paragraph within it (A paragraph is any time a enter: so may have to be weary about line breaks in document)
                 // Results are held in arrays of 100 elements
 
-                IEnumerable<PageMargin> margins = body.Elements<PageMargin>();
-            
-                foreach (PageMargin margin in margins)
-                {
-                    var marginTop = margin.Top;
-                    var marginBottom = margin.Bottom;
-                    var marginLeft = margin.Left;
-                    var marginRight = margin.Right;
-                }
-
-                IEnumerable<Section> sections = body.Elements<Section>();
-
                 IEnumerable<Paragraph> paragraphs = body.Elements<Paragraph>();
                 foreach (Paragraph paragraph in paragraphs)
                 {
-                    ParagraphProperties paragraphProperties = paragraph.ParagraphProperties;
-
-                    if (paragraph.FirstChild != null)
+                    if (paragraph.FirstChild is not null)
                     {
-                        IList<OpenXmlAttribute> openXmlAttributes = paragraph.GetAttributes();
-                        
-                        // Grab the text associated with it
-                        string paragraphInnerText = paragraph.InnerText;
-                        // Can use the HasChildren to see if there is another paragraph
-                        // Can use NoSpellError to check for spelling errors
-
                         // To find out if the paragraph has styling Can also use OuterXml
                         string paragraphRawXml = paragraph.FirstChild.InnerXml;
                         
-                        // Uncomment to show where you can find Fonts
-                        //if (paragraph.InnerText.Contains("First Level Heading"))
-                        //{
-                            // Splitting the entire xml string into the seperate styling strings
-                            string[] innerXmlWithFont = paragraph.InnerXml.Split(">");
+                        if (paragraphRawXml.Contains("pgMar"))
+                        {
+                            // one inch would be roughly 1440 plus or minus 150
+                            // It may be a problem with the bottom margin
+                            var rawXmlSplit = paragraphRawXml.Split(">");
                             
-                            
-                        //}
-                        
+                            // Find the specific pgMar from split
+                            string pageMargin = null;
+                            foreach (string styleElement in rawXmlSplit)
+                            { 
+                                if (styleElement.Contains("pgMar"))
+                                {
+                                    pageMargin = styleElement;
+                                }
+                            }
+
+                            if (pageMargin is not null)
+                            {
+                                string[] xmlRaw = pageMargin.Split(" ");
+                                
+                                // Get integer value and then check if its within a range of 360 points or about 1/4"
+                                // From the 1" or 1440 points
+                                var marginSides = xmlRaw[1..5];
+                                foreach (string side in marginSides)
+                                {
+                                    int marginNum = parseMarginToInt(side);
+                                    // Check if its way off 
+                                    if (marginNum is <= 1260 or >= 1620)
+                                    {
+                                        Errors.Add(new ComponentError("margin_error_1", "Margin is not within bounds of suggested 1 inch margins"));
+                                    }
+                                    else if (marginNum != 1440)
+                                    {
+                                        Warnings.Add(new ComponentWarning("margin_warning_1", "Margins may be off. Inspect to confirm that they are set to 1 inch"));
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-            
-            // these can be deleted - just examples
-            Warnings.Add(new ComponentWarning("margin_warning_1", "warning 1 description"));
-            Warnings.Add(new ComponentWarning("margin_warning_2", "warning 2 description"));
-            Warnings.Add(new ComponentWarning("margin_warning_3", "warning 3 description"));
-
-
-            Errors.Add(new ComponentError("margin_error_1", "error 1 description"));
-            Errors.Add(new ComponentError("margin_error_2", "error 2 description"));
-            Errors.Add(new ComponentError("margin_error_3", "error 3 description"));
         }
+        
+        
+        private static Int32 parseMarginToInt(string marginSide)
+        {
+            string marginSideNum = new String(marginSide.Where(Char.IsDigit).ToArray());
+            int marginIntVal = Int32.Parse(marginSideNum);
+            return marginIntVal;
+        }
+        
     }
 }
