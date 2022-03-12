@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.17
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETDValidatorUnitTests", "..\..\UnitTests\ETDValidatorUnitTests\ETDValidatorUnitTests.csproj", "{07DB0E48-8AE2-498B-84C2-BE8BFE6E794F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETDValidatorUnitTests", "..\..\Testing\ETDValidatorUnitTests\ETDValidatorUnitTests.csproj", "{07DB0E48-8AE2-498B-84C2-BE8BFE6E794F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETDValidator", "ETDValidator\ETDValidator.csproj", "{C1DAB035-0C1F-4788-9067-A055C0436192}"
 EndProject
