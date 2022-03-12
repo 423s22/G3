@@ -9,4 +9,10 @@
     <PackageReference Include="Open-XML-SDK" Version="2.9.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Private.Xml.Linq, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.NETCore.App\5.0.14\System.Private.Xml.Linq.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
