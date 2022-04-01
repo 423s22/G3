@@ -48,7 +48,6 @@ namespace ETDVAlidator.Models.Validators
                 
                 // Pass that to method for checking header is set to 1" or 1440 twentieths of a point
                 validateHeaderSize(headerMarginXml[5], 1440);
-                Console.Out.Write("Test");
 
             }
                 

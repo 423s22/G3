@@ -36,7 +36,7 @@ namespace ETDVAlidator.Models
                 }
             };
 
-            return JsonConvert.SerializeObject(returnValueObj, Formatting.Indented);
+            return JsonConvert.SerializeObject(returnValueObj);
         }
         
     }

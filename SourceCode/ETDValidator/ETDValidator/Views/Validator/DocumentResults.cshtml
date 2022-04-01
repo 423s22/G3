@@ -1,19 +1,22 @@
 @{
     ViewData["Title"] = "Uploader";
 }
-@model LoadDocumentViewModel
+@model DocumentResultsViewModel
+
 <link rel="stylesheet" href="~/css/upload-page.css">
+<script>
+// load JSON passed from backend in DocumentResultsViewModel
+// since we're accessing the view model, this needs to be done in the view file
+function retrieveJson() {
+    let jsonString = JSON.parse('@Model.JsonString'.replace(/&quot;/g, '\"'));
+    
+    // function for building
+    buildForm(jsonString);
+}
+retrieveJson();
+</script>
 
 
 <div class="text-center">
     <h1 class="display-4">ETD Uploader</h1>
-
-    @if (null != @ViewBag.xmlVal)
-    {
-        <p id="return-message">@ViewBag.xmlVal</p>
-    }
-    
 </div>
-
-
-<script src="~/js/upload-page.js"></script>
