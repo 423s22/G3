@@ -22,5 +22,6 @@ namespace ETDVAlidator
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+        
     }
 }
