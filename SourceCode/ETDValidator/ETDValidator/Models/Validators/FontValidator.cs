@@ -95,7 +95,7 @@ namespace ETDVAlidator.Models.Validators
             }
         }
 
-        public bool StyleNeedsChecked(Style styleToCheck)
+        private bool StyleNeedsChecked(Style styleToCheck)
         {
             if (null == styleToCheck.StyleRunProperties)
             {
