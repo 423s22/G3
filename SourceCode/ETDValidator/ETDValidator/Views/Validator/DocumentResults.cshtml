@@ -8,10 +8,10 @@
 // load JSON passed from backend in DocumentResultsViewModel
 // since we're accessing the view model, this needs to be done in the view file
 function retrieveJson() {
-    let jsonString = JSON.parse('@Model.JsonString'.replace(/&quot;/g, '\"'));
+    var jsonString = JSON.parse('@Model.JsonString'.replace(/&quot;/g, '\"'));
     
     // function for building
-    buildForm(jsonString);
+    buildValidationUI(jsonString);
 }
 retrieveJson();
 </script>

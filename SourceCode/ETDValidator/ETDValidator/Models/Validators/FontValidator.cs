@@ -1,19 +1,11 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using Newtonsoft.Json.Linq;
 using System.Linq;
-using System;
-using System.Xml;
-using System.Xml.Linq;
-using DocumentFormat.OpenXml.Math;
 
 namespace ETDVAlidator.Models.Validators
 {
     public class FontValidator : ComponentValidator
     {
-        private Dictionary<int, string> invalidFamilies = new Dictionary<int, string>();
+        private readonly Dictionary<int, string> invalidFamilies = new Dictionary<int, string>();
         public FontValidator()
         {
             Warnings = new List<ComponentWarning>();
