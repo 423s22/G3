@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "Uploader";
 }
+@using System.Globalization
 @model DocumentResultsViewModel
 
 <link rel="stylesheet" href="~/css/upload-page.css">
@@ -8,10 +9,10 @@
 // load JSON passed from backend in DocumentResultsViewModel
 // since we're accessing the view model, this needs to be done in the view file
 function retrieveJson() {
-    let jsonString = JSON.parse('@Model.JsonString'.replace(/&quot;/g, '\"'));
+    var jsonString = JSON.parse('@Model.JsonString'.replace(/&quot;/g, '\"'));
     
     // function for building
-    buildForm(jsonString);
+    buildValidationUI(jsonString);
 }
 retrieveJson();
 </script>
@@ -19,4 +20,10 @@ retrieveJson();
 
 <div class="text-center">
     <h1 class="display-4">ETD Uploader</h1>
+    <p>Showing the results for uploaded file: (Validation completed: @DateTime.Now.ToString(CultureInfo.InvariantCulture)</p>
+    <div id="validation-results-container">
+        
+    </div>
 </div>
+
+<script src="~/js/results-page.js"></script>
