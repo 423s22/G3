@@ -12,8 +12,8 @@ namespace ETDVAlidator.Models.Validators
     public abstract class ComponentValidator
     {
         // warnings and errors will be added to a list and serialized into JSON
-        protected List<ComponentWarning> Warnings;
-        protected List<ComponentError> Errors;
+        public List<ComponentWarning> Warnings;
+        public List<ComponentError> Errors;
         protected WordprocessingDocument DocToValidate;
 
         // generic method to format validations into a JObject 
