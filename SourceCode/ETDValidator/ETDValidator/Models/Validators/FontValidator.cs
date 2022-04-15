@@ -1,19 +1,16 @@
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using Newtonsoft.Json.Linq;
-using System.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
-using System.Xml.Linq;
-using DocumentFormat.OpenXml.Math;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace ETDVAlidator.Models.Validators
 {
     public class FontValidator : ComponentValidator
     {
-        private Dictionary<int, string> invalidFamilies = new Dictionary<int, string>();
+        private readonly Dictionary<int, string> invalidFamilies = new Dictionary<int, string>();
+        private const int FONT_SIZE = 24; // standard 12 point font - openxml stores in half-point sizes
+        private int error_count = 0;
         public FontValidator()
         {
             Warnings = new List<ComponentWarning>();
@@ -24,6 +21,12 @@ namespace ETDVAlidator.Models.Validators
         }
         
         protected override void ParseContents()
+        {
+            ValidateFamilies();
+            ValidateSizes();
+        }
+
+        private void ValidateFamilies()
         {
             // get list of font classes from document font table 
             var fonts = DocToValidate.MainDocumentPart.FontTablePart.Fonts;
@@ -47,6 +50,66 @@ namespace ETDVAlidator.Models.Validators
                     }
                 }
             }
+        }
+
+        private void ValidateSizes()
+        {
+            var styleProps = DocToValidate.MainDocumentPart.StyleDefinitionsPart.Styles;
+
+            try
+            {
+                foreach (var prop in styleProps)
+                {
+                    if (typeof(Style) != prop.GetType())
+                    {
+                        continue;
+                    }
+
+                    if (StyleNeedsChecked((Style) prop))
+                    {
+                        StyleRunProperties runProps = ((Style) prop).StyleRunProperties;
+
+                        if (null != runProps.FontSize)
+                        {
+                            int fontSizeVal = Int32.Parse(runProps.FontSize.Val);
+
+                            if (FONT_SIZE != fontSizeVal)
+                            {
+                                string sizeMsg = FONT_SIZE > fontSizeVal ? "smaller" : "larger";
+                                Errors.Add(new ComponentError("Invalid Font Size", "A font size " + sizeMsg + " than 12pt was found"));
+                            }
+                        }
+
+                        /*
+                        // everything I've seen points to this value being the same as props.FontSize.Val - so we'll ignore it for now
+                        if (null != props.FontSizeComplexScript)
+                        {
+                            int complexFontSizeVal = Int32.Parse(props.FontSizeComplexScript.Val);
+                        }*/
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        private bool StyleNeedsChecked(Style styleToCheck)
+        {
+            if (null == styleToCheck.StyleRunProperties)
+            {
+                return false;
+            }
+
+            string styleId = ((string) styleToCheck.StyleId).ToLower();
+            
+            if (styleId != "normal" && !styleId.Contains("heading") && !styleId.Contains("quote"))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
