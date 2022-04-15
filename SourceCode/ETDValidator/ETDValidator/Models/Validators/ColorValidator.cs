@@ -11,25 +11,50 @@ namespace ETDVAlidator.Models.Validators
             Errors = new List<ComponentError>();
         }
 
+        // TODO: Expand this function to include text within tables
         protected override void ParseContents()
         {
-            foreach (var element in DocToValidate.MainDocumentPart.Document.Body)
+            IEnumerable<Paragraph> paragraphs = DocToValidate.MainDocumentPart.Document.Body.Elements<Paragraph>();
+            if (DocToValidate.MainDocumentPart.Document.DocumentBackground?.Color != null)
             {
-                Paragraph par = element is Paragraph ? (Paragraph) element : null;
-                if (par is null) { continue; }
-                
-                for (var i = 1; i < par.ChildElements.Count; i++)
+                Warnings.Add(new ComponentWarning(
+                        "Color Warning",
+                        "Document contains pages with colored backgrounds."
+                    )
+                );
+            }
+            
+            foreach (Paragraph paragraph in paragraphs)
+            {
+                foreach (Run run in paragraph.Elements<Run>())
                 {
-                    Run run = par.ChildElements[i] is Run ? (Run) par.ChildElements[i] : null;
-                    if (run is null) { continue; }
-
-                    if (run.RunProperties.Color != null && run.RunProperties.Color.GetAttributes()[0].Value != "000000")
+                    Color color = run.RunProperties?.Color != null ? run.RunProperties.Color : null;
+                    if (color?.Val != null && color.Val != "000000")
                     {
                         Warnings.Add(new ComponentWarning(
-                            "Color Warning", 
-                            "Document contains colored text.")
+                            "Color Warning",
+                            "Document contains colored text."
+                            )
                         );
                     }
+
+                    if (run.RunProperties?.Highlight != null || run.RunProperties?.Shading?.Fill != null)
+                    {
+                        Warnings.Add(new ComponentWarning(
+                                "Color Warning",
+                                "Document contains highlighted text."
+                            )
+                        );
+                    }
+                }
+
+                if (paragraph.ParagraphProperties?.Shading?.Fill != null)
+                {
+                    Warnings.Add(new ComponentWarning(
+                            "Color Warning",
+                            "Document contains paragraphs with background coloring."
+                        )
+                    );
                 }
             }
         }

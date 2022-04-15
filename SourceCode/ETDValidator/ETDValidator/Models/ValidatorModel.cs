@@ -23,6 +23,7 @@ namespace ETDVAlidator.Models
             var spaceValidation = new Validators.SpacingValidator().Validate(DocToValidate);
             var marginValidation = new Validators.MarginValidator().Validate(DocToValidate);
             var colorValidation = new Validators.ColorValidator().Validate(DocToValidate);
+            var figureValidation = new Validators.FigureValidator().Validate(DocToValidate);
 
             // this is the object returned to the front end
             // for now it has the name of the passed document and the three validated components
@@ -34,7 +35,8 @@ namespace ETDVAlidator.Models
                     fontValidation,
                     spaceValidation,
                     marginValidation,
-                    colorValidation
+                    colorValidation,
+                    figureValidation
                 }
             };
 
