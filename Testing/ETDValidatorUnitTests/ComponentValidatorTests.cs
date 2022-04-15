@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace ETDValidatorUnitTests
 {
-    public class ComponenetValidatorTests
+    public class ComponentValidatorTests
     {
 
         [Fact]
