@@ -8,9 +8,15 @@ Authors: Silas Almgren, Marnie Manning, Patrick O'Connor
 
 ## Using the application
 
-For now the in-devlopment application can be found at our [development heroku app](https://etdvalidator-dev.herokuapp.com/)
+For now the in-devlopment application can be found at our [development heroku app](https://etdvalidator-dev.herokuapp.com/).
+
+The production application can currently [be found here](https://etdvalidator.herokuapp.com/)
 
 ## Development  Instructions
+
+### Deployment to Heroku
+
+For instructions to deploy the application to production [see this document](Docs/DeploymentInstructions.md)
 
 ### Source Code Projects File Structure
 
@@ -37,7 +43,7 @@ For now the in-devlopment application can be found at our [development heroku ap
 
 #### Necessary Tools/Software
 
-- Visual Studio IDE (available at [here](https://visualstudio.microsoft.com/downloads/))
+- JetBrains Rider ([download](link)) or Visual Studio IDE ([download](https://visualstudio.microsoft.com/downloads/))
 - .NET SDK 5 (available at [here](https://dotnet.microsoft.com/en-us/download/dotnet/5.0))
 - Git (<https://git-scm.com/>)
 - Terminal on Mac/Linux, PowerShell on Windows
@@ -49,11 +55,11 @@ Clone the repo by running
 
 #### Running
 
-There are two ways to build and run the .NET application, with Visual Studio and with the dotnet CLI tools (which should be automatically installed upon downloading the .NET SDK)
+There are two ways to build and run the .NET application, with an IDE and with the dotnet CLI tools (which should be automatically installed upon downloading the .NET SDK)
 
-With Visual Studio:
+With IDE:
 
-1. Open Visual Studio
+1. Open your chosen IDE
 2. Select "Open Exisiting Project"
 3. Open ETDValidator.sln (at ./G3/SourceCode/ETDValidator/)
 4. Click the run button and the application should build and open in your browser
