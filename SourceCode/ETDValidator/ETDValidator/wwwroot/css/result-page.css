@@ -1,0 +1,56 @@
+.error-name{
+    background-color: rgba(255,0,0,.5);;
+}
+
+.warning-name{
+    background-color: rgba(255,255,0,.5);
+}
+
+.result-name{
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    padding: 10px 10px;
+    border-radius: 10px;
+    width: 15%;
+}
+
+.result-descriptions{
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    margin-left: 20px;
+}
+
+
+.validation-results-container{
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: left;
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    padding-left: 12px;
+    background-color: #FFF;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 90%;
+}
+
+.result-numbering{
+    background-color: #ECECEC;
+    margin: 0 auto;
+}
+
+#valid-document{
+    background-color: rgba(0,255,0,.5);
+    width: 75%;
+    padding: 10px 40px;
+}
+
