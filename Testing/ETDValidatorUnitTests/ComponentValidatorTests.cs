@@ -18,8 +18,8 @@ namespace ETDValidatorUnitTests
 
             validator.Validate();
             
-            Assert.Equal(0,validator.TotalErrorCount);
-            Assert.Equal(0,validator.TotalWarningCount);
+            Assert.Empty(validator.ValidationResults.AllErrors);
+            Assert.Empty(validator.ValidationResults.AllWarnings);
         }
         
         [Fact]

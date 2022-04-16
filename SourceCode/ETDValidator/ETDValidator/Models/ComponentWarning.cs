@@ -5,12 +5,6 @@ namespace ETDVAlidator.Models
         public string WarningName { get; set; }
         public string WarningDescription { get; set; }
         
-        public ComponentWarning()
-        {
-            WarningName = "";
-            WarningDescription = "";
-        }
-
         public ComponentWarning(string warningName, string warningDescription)
         {
             WarningName = warningName;
