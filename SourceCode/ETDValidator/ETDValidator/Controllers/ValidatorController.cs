@@ -33,7 +33,7 @@ namespace ETDVAlidator.Controllers
         [HttpPost]
         public IActionResult DocumentResults(LoadDocumentViewModel viewModel)
         {
-            var returnJson = "";
+            DocumentResultsViewModel returnModel = new DocumentResultsViewModel(viewModel.Document.Name);
             TempData["Error"] = null;
             
             try
@@ -61,7 +61,7 @@ namespace ETDVAlidator.Controllers
                     ValidatorModel vm = new ValidatorModel(wordDocument, filename);
                  
                     // do the validation and format to json string
-                    returnJson = vm.Validate();
+                    returnModel = vm.Validate();
                 }
             }
             catch (Exception e)
@@ -82,7 +82,7 @@ namespace ETDVAlidator.Controllers
             }
 
             // return document results view
-            return View(new DocumentResultsViewModel(returnJson));
+            return View(returnModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

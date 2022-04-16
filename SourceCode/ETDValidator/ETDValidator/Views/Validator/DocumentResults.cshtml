@@ -6,49 +6,44 @@
 
 <link rel="stylesheet" href="~/css/upload-page.css">
 <link rel="stylesheet" href="~/css/result-page.css">
-<script>
-// load JSON passed from backend in DocumentResultsViewModel
-// since we're accessing the view model, this needs to be done in the view file
-function retrieveJson() {
-    var jsonString = JSON.parse('@Model.JsonString'.replace(/&quot;/g, '\"'));
-    
-    // function for building
-    buildValidationUI(jsonString);
-}
-retrieveJson();
-</script>
-
 
 <div class="text-center">
     <h1 class="display-4">ETD Uploader</h1>
-    <p>Showing the results for uploaded file: (Validation completed: @DateTime.Now.ToString(CultureInfo.InvariantCulture))</p>
+    <p>Showing the results for uploaded file: @Model.ValidatedDocName (Validation completed: @DateTime.Now.ToString(CultureInfo.InvariantCulture))</p>
 </div>
 
-<div class="validation-results-container" id="errors">
-    <div class="result-numbering">
-    <p class="error-name result-name"> warning name </p>
-        <p class="result-descriptions">
-            This is just an example place holder that will be filled with correct description.
-            For details, consult link:
-        </p>
-    </div>    
-</div>
-    
-<div class="validation-results-container" id="warnings">
-    <div class="result-numbering">
-        <p class="warning-name result-name"> warning name </p>
-        <p class="result-descriptions">
-            This is just an example place holder that will be filled with correct description.
-            For details, consult link:
+@if (0 == Model.AllErrors.Count && 0 == Model.AllWarnings.Count)
+{
+    <div class="validation-results-container" >
+        <p class="result-descriptions" id="valid-document">
+            Document checking completed. No errors or warnings to show.
         </p>
     </div>
-</div>
-
-<div class="validation-results-container" >
-    <p class="result-descriptions" id="valid-document">
-        Document checking completed. No errors or warnings to show.
-    </p>
-</div>
-
-
-<script src="~/js/results-page.js"></script>
+}
+else
+{
+    
+@foreach (ComponentError error in Model.AllErrors)
+{
+    <div class="validation-results-container" id="errors">
+        <div class="result-numbering">
+            <p class="error-name result-name">@error.ErrorName</p>
+            <p class="result-descriptions">
+                @error.ErrorDescription
+            </p>
+        </div>    
+    </div>
+}
+    
+@foreach (ComponentWarning warning in Model.AllWarnings)
+{
+    <div class="validation-results-container" id="warnings">
+        <div class="result-numbering">
+            <p class="warning-name result-name">@warning.WarningName</p>
+            <p class="result-descriptions">
+                @warning.WarningDescription
+            </p>
+        </div>
+    </div>
+}
+}
