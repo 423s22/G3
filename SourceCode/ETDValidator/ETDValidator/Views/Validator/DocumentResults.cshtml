@@ -22,28 +22,45 @@
 }
 else
 {
-    
-@foreach (ComponentError error in Model.AllErrors)
-{
-    <div class="validation-results-container" id="errors">
-        <div class="result-numbering">
-            <p class="error-name result-name">@error.ErrorName</p>
-            <p class="result-descriptions">
-                @error.ErrorDescription
-            </p>
-        </div>    
+    <div id="results">
+    <ol>
+        @foreach (ComponentError error in Model.AllErrors)
+        {
+            <li>
+                <div class="validation-results-container">
+                    <strong class="error-name result-name">Error</strong>
+                    <span class="result-descriptions">@error.ErrorDescription</span>
+                    <div>
+                        <p class="guidance">
+                            For further guidance, consult <a href="https://www.montana.edu/etd/etd_format.html#format_guides">MSU Graduate ETD formmating information.</a>
+                        </p>
+                        <p class="guidance">
+                            If the ETD validator has misidentified a component of this document, please file an issue
+                            <a href="https://www.montana.edu/etd/etd_format.html#format_guides">report</a>.
+                        </p>
+                    </div>        
+                </div>
+            </li>
+        }
+        
+        @foreach (ComponentWarning warning in Model.AllWarnings)
+        {
+            <li>
+                <div class="validation-results-container">
+                    <strong class="warning-name result-name">Warning</strong>
+                    <span class="result-descriptions">@warning.WarningDescription</span>
+                    <div>
+                        <p class="guidance">
+                            For further guidance, consult <a href="https://www.montana.edu/etd/etd_format.html#format_guides">MSU Graduate ETD formmating information.</a>.
+                        </p>
+                        <p class="guidance">
+                            If the ETD validator has misidentified a component of this document, please file an issue
+                            <a href="https://www.montana.edu/etd/etd_format.html#format_guides">report</a>.
+                        </p>
+                    </div>
+                </div>
+            </li>
+        }
+    </ol>
     </div>
-}
-    
-@foreach (ComponentWarning warning in Model.AllWarnings)
-{
-    <div class="validation-results-container" id="warnings">
-        <div class="result-numbering">
-            <p class="warning-name result-name">@warning.WarningName</p>
-            <p class="result-descriptions">
-                @warning.WarningDescription
-            </p>
-        </div>
-    </div>
-}
 }
