@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
 using DocumentFormat.OpenXml.Packaging;
 using ETDVAlidator.Models.Validators;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ETDVAlidator.Models
 {
@@ -21,6 +24,8 @@ namespace ETDVAlidator.Models
 
         public string Validate()
         {
+            //TODO: this process should probably be done iteratively
+            
             // validate individual components and return their validation as a JObject
             FontValidator fontValidator = new FontValidator();
             var fontValidation = fontValidator.Validate(DocToValidate);
@@ -36,8 +41,18 @@ namespace ETDVAlidator.Models
             var pageNumberValidation = pageNumberValidator.Validate(DocToValidate);
             TotalErrorCount += pageNumberValidator.Errors.Count;
             TotalWarningCount += pageNumberValidator.Warnings.Count;
-            
 
+            FigureValidator figureValidator = new FigureValidator();
+            var figureValidation = figureValidator.Validate(DocToValidate);
+            TotalErrorCount += figureValidator.Errors.Count;
+            TotalWarningCount += figureValidator.Warnings.Count;
+
+            ColorValidator colorValidator = new ColorValidator();
+            var colorValidation = colorValidator.Validate(DocToValidate);
+            TotalErrorCount += colorValidator.Errors.Count;
+            TotalWarningCount += colorValidator.Warnings.Count;
+            
+            
             // this is the object returned to the front end
             // for now it has the name of the passed document and the three validated components
             var returnValueObj = new
@@ -47,7 +62,9 @@ namespace ETDVAlidator.Models
                     document_name = FileName,
                     fontValidation,
                     marginValidation,
-                    pageNumberValidation
+                    pageNumberValidation,
+                    figureValidation,
+                    colorValidation
                 }
             };
 
