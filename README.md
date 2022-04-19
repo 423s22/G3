@@ -43,7 +43,7 @@ For instructions to deploy the application to production [see this document](Doc
 
 #### Necessary Tools/Software
 
-- JetBrains Rider ([download](link)) or Visual Studio IDE ([download](https://visualstudio.microsoft.com/downloads/))
+- JetBrains Rider ([download](https://www.jetbrains.com/rider/download/)) or Visual Studio IDE ([download](https://visualstudio.microsoft.com/downloads/))
 - .NET SDK 5 (available at [here](https://dotnet.microsoft.com/en-us/download/dotnet/5.0))
 - Git (<https://git-scm.com/>)
 - Terminal on Mac/Linux, PowerShell on Windows
