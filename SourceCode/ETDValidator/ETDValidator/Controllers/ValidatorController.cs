@@ -33,6 +33,12 @@ namespace ETDVAlidator.Controllers
         [HttpPost]
         public IActionResult DocumentResults(LoadDocumentViewModel viewModel)
         {
+            if (null == viewModel.Document)
+            {
+                TempData["Error"] = "Please upload a document to validate";
+                return RedirectToAction("LoadDocument");
+            }
+            
             DocumentResultsViewModel returnModel = new DocumentResultsViewModel(viewModel.Document.Name);
             TempData["Error"] = null;
             

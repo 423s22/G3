@@ -9,16 +9,16 @@
     <h1 class="display-4">ETD Uploader</h1>
     
     <div id="file-loader-container" class="container-fluid">
-        @if (null != @ViewBag.error)
+        @if (null != ViewBag.error)
         {
-            <p id="return-message">@ViewBag.error</p>
+            <p id="return-message" style="color: red">@ViewBag.error</p>
         }
         <form method="POST" asp-controller="Validator" asp-action="DocumentResults" enctype="multipart/form-data">
             <div class="drop-zone">
                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
                 <input type="file" name="Document" asp-for="Document" class="drop-zone__input">
             </div>
-            <input type="submit" id="drop-zone__submit"  accept=".docx"  value="Upload File" class="submit"/>
+            <input type="submit" id="drop-zone__submit"  accept=".docx"  value="Validate" class="submit"/>
         </form>
     </div>
     
