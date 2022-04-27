@@ -9,6 +9,8 @@ namespace ETDVAlidator.Models.Validators
         {
             Warnings = new List<ComponentWarning>();
             Errors = new List<ComponentError>();
+
+            Name = "colors";
         }
 
         // TODO: Expand this function to include text within tables

@@ -35,9 +35,19 @@ namespace ETDVAlidator.Models
 
             foreach (ComponentValidator validator in validators)
             {
-                validator.Validate(DocToValidate);
-                ValidationResults.AllErrors.AddRange(validator.Errors);
-                ValidationResults.AllWarnings.AddRange(validator.Warnings);
+                try
+                {
+                    validator.Validate(DocToValidate);
+                    ValidationResults.AllErrors.AddRange(validator.Errors);
+                    ValidationResults.AllWarnings.AddRange(validator.Warnings);
+                }
+                catch (Exception e)
+                {
+                    string validationErrorMessage =
+                        "We had an issue validating your " + validator.Name + ". Please check manually.";
+                    ValidationResults.AllErrors.Add(new ComponentError("Validation Issue", validationErrorMessage));
+                    Console.WriteLine(e.StackTrace);
+                }
             }
             
             ValidationResults.FilterDuplicatesByDescription();

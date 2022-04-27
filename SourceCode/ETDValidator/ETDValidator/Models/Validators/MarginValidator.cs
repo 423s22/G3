@@ -16,6 +16,8 @@ namespace ETDVAlidator.Models.Validators
         {
             Warnings = new List<ComponentWarning>();
             Errors = new List<ComponentError>();
+
+            Name = "margins";
         }
         
         protected override void ParseContents()

@@ -15,6 +15,8 @@ namespace ETDVAlidator.Models.Validators
         {
             Warnings = new List<ComponentWarning>();
             Errors = new List<ComponentError>();
+
+            Name = "page numbers";
         }
 
         protected override void ParseContents()
