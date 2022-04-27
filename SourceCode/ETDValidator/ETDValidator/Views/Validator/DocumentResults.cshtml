@@ -28,7 +28,17 @@ else
         {
             <li>
                 <div class="validation-results-container">
-                    <strong class="error-name result-name">Error</strong>
+                    
+                    <!-- Display slightly different error for validation issues -->
+                    @if (error.ErrorName.Equals("Validation Issue"))
+                    {
+                        <strong class="error-name result-name">Validation Error</strong>
+                    }
+                    else
+                    {
+                        <strong class="error-name result-name">Error</strong>
+                    }
+                    
                     <span class="result-descriptions">@error.ErrorDescription</span>
                     <div>
                         <p class="guidance">
@@ -38,7 +48,7 @@ else
                             If the ETD validator has misidentified a component of this document, please file an issue
                             <a href="https://www.montana.edu/etd/etd_format.html#format_guides">report</a>.
                         </p>
-                    </div>        
+                    </div>
                 </div>
             </li>
         }

@@ -14,11 +14,13 @@ namespace ETDVAlidator.Models.Validators
         // we'll only report one error for each potential outcome
         private bool foundSmallerSize = false;
         private bool foundLargerSize = false;
-        
+
         public FontValidator()
         {
             Warnings = new List<ComponentWarning>();
             Errors = new List<ComponentError>();
+
+            Name = "fonts";
             
             invalidFamilies.Add(4, "script");
             invalidFamilies.Add(5, "decorative");
@@ -59,6 +61,7 @@ namespace ETDVAlidator.Models.Validators
                 // should never happen, FontTablePart.Fonts should only contain fonts
                 //   but we don't want to reject the document if something wonky happens
                 Console.WriteLine("Issue parsing fonts...");
+                Console.WriteLine(e.StackTrace);
             }
             
         }

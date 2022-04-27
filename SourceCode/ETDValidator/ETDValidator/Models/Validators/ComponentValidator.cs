@@ -11,55 +11,21 @@ namespace ETDVAlidator.Models.Validators
     // this will be the abstract class inherited by every component validator
     public abstract class ComponentValidator
     {
-        // warnings and errors will be added to a list and serialized into JSON
+        // warnings and errors will be added to a list
         public List<ComponentWarning> Warnings;
         public List<ComponentError> Errors;
         protected WordprocessingDocument DocToValidate;
 
-        // generic method to format validations into a JObject 
-        public JObject Validate(WordprocessingDocument docToValidate)
+        public string Name;
+
+        // generic method to validate using a componentvalidator 
+        public void Validate(WordprocessingDocument docToValidate)
         {
+            // define file to validate
             DocToValidate = docToValidate;
             
-            // parse contents into error and warning lists
-            
+            // parse contents into error and warning list
             ParseContents();
-            JObject componentValidation = new JObject();
-            
-            try
-            {
-                // top level JObject will have name of the specific ComponentValidation subclass
-                // the warnings and errors are then added as arrays of objects (ComponentWarning and ComponentError objects specifically)
-                componentValidation = new JObject(
-                        new JObject(
-                            new JProperty("warnings",
-                                new JArray(
-                                    from warning in Warnings
-                                    select new JObject(
-                                        new JProperty("warning_name", warning.WarningName),
-                                        new JProperty("warning_description", warning.WarningDescription)
-                                    )
-                                )
-                            ),
-                            new JProperty("errors",
-                                new JArray(
-                                    from error in Errors
-                                    select new JObject(
-                                        new JProperty("error_name", error.ErrorName),
-                                        new JProperty("error_description", error.ErrorDescription)
-                                    )
-                                )
-                            )
-                        )
-                );
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            
-            
-            return componentValidation;
         }
 
         /// <summary>
