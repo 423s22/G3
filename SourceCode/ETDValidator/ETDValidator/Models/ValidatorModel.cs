@@ -31,7 +31,7 @@ namespace ETDVAlidator.Models
             validators.Add(new MarginValidator());
             validators.Add(new PageNumberValidator());
             validators.Add(new FigureValidator());
-
+	    validators.Add(new QuotationValidator());
 
             foreach (ComponentValidator validator in validators)
             {
