@@ -29,6 +29,12 @@ This section will detail the features to be tested and the list of individual te
 > - The submission is succesful
 > - The page redirects to [https://etdvalidator.herokuapp.com/DocumentResults](https://etdvalidator-dev.herokuapp.com/DocumentResults)
 > - The redirected page displays a message that the document
+>
+> Actual Results:
+>
+> - ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) `PASS`
+> - Input: Uploaded the valid .docx file
+> - Output: The output matched the expected results
 
 ##### Upload an invalid .docx file
 
@@ -43,6 +49,12 @@ This section will detail the features to be tested and the list of individual te
 > - The submission is succesful
 > - The page redirects to [https://etdvalidator.herokuapp.com/DocumentResults](https://etdvalidator-dev.herokuapp.com/DocumentResults)
 > - The redirected page succesfully displays all errors/warnings associated with the uploaded document
+>
+> Actual Results:
+>
+> - ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) `PASS`
+> - Input: Uploaded an ivalid test .docx file
+> - Output: The output matched the expected results
 
 ##### Upload a file without the .docx extension
 
@@ -56,6 +68,12 @@ This section will detail the features to be tested and the list of individual te
 >
 > - Any file without the .docx extension should not be selectable
 > - If a file without the .docx extension can be selected, clicking the Validate button will cause the file upload to fail
+>
+> Actual Results:
+>
+> - ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) `PASS`
+> - Input: Attempted to upload non-.docx file
+> - Output: File upload was not possible
 
 ##### Upload a non-.docx file that has the .docx extension
 
@@ -69,3 +87,9 @@ This section will detail the features to be tested and the list of individual te
 > Expected Results:
 >
 > - The file upload fails and an error message is displayed
+>
+> Actual Results:
+>
+> - ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) `PASS`
+> - Input: Uploaded a PDF masked as a .docx file
+> - Output: File upload failed and an error message was displayed
