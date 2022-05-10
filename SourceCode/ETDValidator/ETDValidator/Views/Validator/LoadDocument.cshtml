@@ -16,9 +16,9 @@
         <form method="POST" asp-controller="Validator" asp-action="DocumentResults" enctype="multipart/form-data">
             <div class="drop-zone">
                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                <input type="file" name="Document" asp-for="Document" class="drop-zone__input">
+                <input type="file" name="Document" accept=".docx" asp-for="Document" class="drop-zone__input">
             </div>
-            <input type="submit" id="drop-zone__submit"  accept=".docx"  value="Validate" class="submit"/>
+            <input type="submit" id="drop-zone__submit" value="Validate" class="submit"/>
         </form>
     </div>
     
